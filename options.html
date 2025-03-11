@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Midjourney Prompt Enhancer Settings</title>
+  <style>
+    :root {
+      --primary-color: #2196F3;
+      --bg-color: #1e1e1e;
+      --text-color: #fff;
+      --border-color: #444;
+      --hover-color: #2d2d2d;
+      --success-color: #4CAF50;
+      --danger-color: #f44336;
+      --warning-color: #ff9800;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--primary-color);
+    }
+
+    .search-box {
+      position: relative;
+      width: 300px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 8px 12px;
+      padding-left: 36px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background: #333;
+      color: var(--text-color);
+      font-size: 14px;
+    }
+
+    .search-box::before {
+      content: "🔍";
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.5;
+    }
+
+    .keyword-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background: #2d2d2d;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .keyword-table th,
+    .keyword-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .keyword-table th {
+      background: #333;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .keyword-table tr:hover {
+      background: var(--hover-color);
+    }
+
+    .keyword-table tr.editing {
+      background: #333;
+    }
+
+    .options-cell {
+      max-width: 500px;
+    }
+
+    .options-display {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .option-tag {
+      background: #444;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .color-tag {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .color-preview {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-edit {
+      background: var(--warning-color);
+      margin-right: 8px;
+    }
+
+    .btn-save {
+      background: var(--success-color);
+      margin-right: 8px;
+    }
+
+    .btn-delete {
+      background: var(--danger-color);
+    }
+
+    .btn-cancel {
+      background: #666;
+      margin-right: 8px;
+    }
+
+    .btn-add {
+      margin-top: 20px;
+      font-size: 16px;
+      padding: 12px 24px;
+    }
+
+    .add-form {
+      background: #2d2d2d;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      flex: 1;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background: #333;
+      color: var(--text-color);
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .form-group textarea {
+      height: 100px;
+      resize: vertical;
+    }
+
+    .inline-edit {
+      display: none;
+      height: 100px;
+      min-height: 100px;
+      width: 100%;
+    }
+
+    tr.editing .inline-edit {
+      display: block;
+      height: 100px;
+    }
+
+    tr.editing .options-display {
+      display: none;
+    }
+
+    .help-text {
+      font-size: 12px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 12px 24px;
+      border-radius: 4px;
+      background: var(--success-color);
+      color: white;
+      font-size: 14px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast.error {
+      background: var(--danger-color);
+    }
+
+    .section {
+      margin-bottom: 40px;
+      padding: 20px;
+      background: #2d2d2d;
+      border-radius: 8px;
+    }
+
+    .section h2 {
+      margin-top: 0;
+      color: var(--primary-color);
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+
+    .site-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .site-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: #333;
+      margin-bottom: 8px;
+      border-radius: 4px;
+    }
+
+    .empty-message {
+      color: #888;
+      font-style: italic;
+      padding: 12px;
+    }
+
+    .help-text {
+      color: #888;
+      font-size: 0.9em;
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Midjourney Prompt Enhancer Settings</h1>
+    </div>
+
+    <div class="section">
+      <h2>Site Management</h2>
+      <p class="help-text">The extension will only be active on the sites listed below. Add the domains where you want the extension to work.</p>
+      <ul id="siteList" class="site-list">
+        <!-- Sites will be added here dynamically -->
+      </ul>
+      <button id="addSiteBtn" class="btn btn-add">Add Site</button>
+    </div>
+
+    <div class="section">
+      <h2>Keyword Management</h2>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search keywords...">
+      </div>
+      
+      <table class="keyword-table">
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Options</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="keywordTableBody">
+          <!-- Keywords will be added here dynamically -->
+        </tbody>
+      </table>
+
+      <div class="add-form">
+        <h3>Add New Keyword</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="newKeyword">Keyword</label>
+            <input type="text" id="newKeyword" placeholder="Enter keyword (e.g., style, mood)">
+            <div class="help-text">Single word, lowercase, no spaces</div>
+          </div>
+          <div class="form-group">
+            <label for="newOptions">Options</label>
+            <textarea id="newOptions" placeholder="Enter options, one per line"></textarea>
+            <div class="help-text">One option per line. For colors, use valid CSS color names or hex codes.</div>
+          </div>
+        </div>
+        <button id="addKeywordBtn" class="btn btn-add">Add Keyword</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="options.js"></script>
+</body>
+</html> 
