@@ -12,17 +12,17 @@ A powerful Chrome extension that enhances your Midjourney prompts by providing #
 ## Installation
 
 Download the Extension:
-Click on "Code" > "Download ZIP."
-Extract the downloaded ZIP file to a folder on your computer.
-Load the Extension in Your Browser:
-Open your Chromium-based browser (such as Google Chrome, Microsoft Edge, or Brave).
-Enter chrome://extensions/ in the address bar and press Enter to open the Extensions page.
-In the top-right corner, toggle on "Developer mode."
-Click the "Load unpacked" button.
-Navigate to and select the folder where you extracted the extension files.
-Access the Extension:
-After loading, the extension icon should appear in your browser's toolbar.
-If the icon is not visible, click the Extensions menu (puzzle piece icon), locate your extension, and click the pin icon to add it to the toolbar.
+- Click on "Code" > "Download ZIP."
+- tract the downloaded ZIP file to a folder on your computer.
+- Load the Extension in Your Browser:
+  Open your Chromium-based browser (such as Google Chrome, Microsoft Edge, or Brave).
+  Enter chrome://extensions/ in the address bar and press Enter to open the Extensions page.
+  In the top-right corner, toggle on "Developer mode."
+- Click the "Load unpacked" button.
+  Navigate to and select the folder where you extracted the extension files.
+- Access the Extension:
+  After loading, the extension icon should appear in your browser's toolbar.
+  If the icon is not visible, click the Extensions menu (puzzle piece icon), locate your extension, and click the pin icon to add it to the toolbar.
 
 ## How to Use
 
@@ -54,7 +54,8 @@ This extension does not collect or store any personal data. All prompt enhanceme
 ## Acknowledgments
 
 - Thanks to the Midjourney team for their amazing AI image generation platform
-- All contributors who have helped improve this extension
+- Thanks to cursor - this was coded entirely using Cursor.
+- Thanks to @iambavith for the help required to fix some bugs.
 
 ---
 
