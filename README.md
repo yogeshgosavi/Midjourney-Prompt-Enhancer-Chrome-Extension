@@ -2,6 +2,10 @@
 
 A powerful Chrome extension that enhances your Midjourney prompts by providing # keywords that let you improve your prompts for better AI image generation results.
 
+<div align="center">
+  <img src="https://i.imgur.com/Xw33xCP.png" alt="Banner Image">
+</div>
+
 ## Features
 
 - 🎨 Powerful keywords list inbuilt
